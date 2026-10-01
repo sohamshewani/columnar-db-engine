@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Define the build target
+TARGET=columnar_db_engine
+
+# Build the project
+make -j $(nproc)
+
+# Run unit tests
+make test
+
+# Run integration tests
+make integration-test

@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# Define the main entry point for the columnar database engine
+
+# Include header files
+#include "include/core.h"
+#include "src/storage/storage.h"
+#include "src/query_execution/query_execution.h"
+#include "src/compression/compression.h"
+
+int main(int argc, char *argv[]) {
+	// Initialize the database engine
+	initialize_database_engine();
+	
+	// Handle command line arguments
+	if (argc > 1) {
+		if (strcmp(argv[1], "init") == 0) {
+			initialize_database();
+		} else if (strcmp(argv[1], "query") == 0) {
+			query_database(argv[2]);
+		} else if (strcmp(argv[1], "compress") == 0) {
+			compress_data(argv[2]);
+		} else if (strcmp(argv[1], "decompress") == 0) {
+			decompress_data(argv[2]);
+		} else {
+			printf("Unknown command: %s\n", argv[1]);
+		}
+	}
+	
+	// Clean up and exit
+	shutdown_database_engine();
+	return 0;
+}
